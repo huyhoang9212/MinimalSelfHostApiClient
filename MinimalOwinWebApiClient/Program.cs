@@ -33,8 +33,10 @@ namespace MinimalOwinWebApiClient
 
             try
             {
+                string password = "password";
+                //JohnsPassword
                 // Pass in the credentials and retrieve a token dictionary:
-                _tokenDictionary = await provider.GetTokenDictionary("john@example.com", "password");
+                _tokenDictionary = await provider.GetTokenDictionary("john@example.com", password);
                 _accessToken = _tokenDictionary["access_token"];
 
                 // Write the contents of the dictionary:
@@ -56,7 +58,7 @@ namespace MinimalOwinWebApiClient
                 int nextId = (from c in companies select c.Id).Max() + 1;
 
                 Console.WriteLine("Add a new company...");
-                var result = await companyClient.AddCompanyAsync(new Company { Name = string.Format("New Company #{0}", nextId) });
+                var result = await companyClient.AddCompanyAsync(new Company { Name = string.Format("New Company #{0}", nextId), Id = nextId });
                 WriteStatusCodeResult(result);
 
                 Console.WriteLine("Updated List after Add:");
